@@ -1,0 +1,48 @@
+# bin folder
+/bin/
+/bin/*
+
+# class files
+*.class
+
+# Gradle ignores
+.gradle
+
+# Build ignores
+/build
+target
+out
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+!/lib/*.jar
+*.war
+*.ear
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IDE stuff
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.idea
+.groovy/
+
+# Gradle Wrapper
+
+/.apt_generated/
+
+#Mac
+.DS_Store
+
+#Generated files
+/src/main/java/generated
+gradlew.bat
