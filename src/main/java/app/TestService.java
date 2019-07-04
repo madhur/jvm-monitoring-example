@@ -14,6 +14,7 @@ public class TestService {
     private MetricsConfig metricsConfig;
 
 
+    @Timed(name = "metrics.example.testMethod", absolute = true)
     public void testMethod() {
         // Increment the counter
         metricsConfig.publishCounter.inc();

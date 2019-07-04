@@ -1,10 +1,13 @@
 package app;
 
+import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
+@Configuration
+@EnableMetrics
 public class ProdMetricsConfig extends MetricsConfig {
 
     private static final String GRAPHITE_PREFIX =

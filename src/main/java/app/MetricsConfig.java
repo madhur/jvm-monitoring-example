@@ -13,6 +13,7 @@ import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,13 +21,15 @@ import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
-@Component
 public abstract class MetricsConfig extends MetricsConfigurerAdapter{
 
-    private final MetricRegistry metrics = new MetricRegistry();
-    Meter publishMeter = metrics.meter("publish.meter");
-    Counter publishCounter = metrics.counter("publish.counter");
-    Timer publishTimer = metrics.timer("publish.timer");
+    @Autowired
+    private MetricRegistry metrics;
+
+    Meter publishMeter;
+    Counter publishCounter;
+    Timer publishTimer ;
+    Meter secondTimer;
 
     @Value("${graphite.host}")
     private String graphiteHost;
@@ -71,6 +74,10 @@ public abstract class MetricsConfig extends MetricsConfigurerAdapter{
 
     private GraphiteReporter.Builder getGraphiteReporterBuilder(MetricRegistry
                                                        metricRegistry) {
+        publishTimer = metricRegistry.timer("publish.timer");
+        publishCounter = metricRegistry.counter("publish.counter");
+        publishMeter = metricRegistry.meter("publish.meter");
+        secondTimer = metricRegistry.meter("publish.second.meter");
         metricRegistry.register("gc", new GarbageCollectorMetricSet());
         metricRegistry.register("memory", new MemoryUsageGaugeSet());
         metricRegistry.register("threads", new ThreadStatesGaugeSet());
