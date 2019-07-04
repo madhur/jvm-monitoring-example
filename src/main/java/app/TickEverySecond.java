@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 @Component
 public class TickEverySecond extends TimerTask {
-    
+
     @Autowired
     private MetricsConfig metricsConfig;
 
