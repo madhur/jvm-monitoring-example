@@ -40,6 +40,7 @@ public abstract class MetricsConfig extends MetricsConfigurerAdapter{
     @Value("${graphite.amount.of.time.between.polls}")
     private long graphiteAmountOfTimeBetweenPolls;
 
+    @Value("${graphite.prefix}")
     private String graphitePrefix;
 
     @PostConstruct
@@ -52,10 +53,8 @@ public abstract class MetricsConfig extends MetricsConfigurerAdapter{
 
     }
 
-    abstract protected void configureReporters();
 
-    protected void configureReporters(String graphitePrefix) {
-        this.graphitePrefix = graphitePrefix;
+    protected void configureReporters() {
         configureReporters(metrics);
     }
 
